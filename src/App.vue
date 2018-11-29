@@ -2,7 +2,9 @@
   <div id="app">
     <m-heador></m-heador>
     <m-tab></m-tab>
-    <router-view/>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
