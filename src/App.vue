@@ -1,15 +1,17 @@
 <template>
   <div id="app">
-    <mheador></mheador>
+    <m-heador></m-heador>
+    <m-tab></m-tab>
     <router-view/>
   </div>
 </template>
 
 <script>
-import mheador from 'components/header/Heador'
+import MHeador from 'components/header/Heador'
+import MTab from 'components/tab/tab'
 export default {
   name: 'App',
-  components: {mheador}
+  components: {MHeador, MTab}
 }
 </script>
 
