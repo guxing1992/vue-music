@@ -141,7 +141,7 @@ export default {
       console.log(this.threshold)
       this.slide = new BScroll(this.$refs.slide, {
         scrollX: true,
-        scrollY: false,
+        scrollY: true,
         momentum: false,
         snap: {
           loop: this.loop,

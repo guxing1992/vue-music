@@ -1,19 +1,27 @@
 <template>
-  <div class="mf-loading-container">
-    <img src="./loading.gif">
+  <div class="loading">
+    <img width="24" height="24" src="./loading.gif">
+    <p class="desc">{{title}}</p>
   </div>
 </template>
 <script type="text/ecmascript-6">
-const COMPONENT_NAME = 'loading'
-
 export default {
-  name: COMPONENT_NAME
+  props: {
+    title: {
+      type: String,
+      default: '正在载入...'
+    }
+  }
 }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
-  .mf-loading-container
-    img
-      width: 20px
-      height: 20px
-      display: block
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  @import "~common/stylus/variable"
+
+  .loading
+    width: 100%
+    text-align: center
+    .desc
+      line-height: 20px
+      font-size: $font-size-small
+      color: $color-text-l
 </style>

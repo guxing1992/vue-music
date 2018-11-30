@@ -27,11 +27,15 @@
         </div>
       </div>
     </scorll>
+    <div class="loading-container" v-show="!discList.length">
+      <loading></loading>
+    </div>
     <router-view></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import Loading from '@/base/loading/loading'
 import Slider from '@/base/slider/slider'
 import Scorll from '@/base/scroll/scroll'
 import {getRecommand, getDiscList} from '@/api/recommand'
@@ -69,7 +73,8 @@ export default {
   },
   components: {
     Slider,
-    Scorll
+    Scorll,
+    Loading
   }
 }
 </script>
@@ -82,6 +87,11 @@ export default {
     width: 100%
     top: 88px
     bottom: 0
+    .loading-container
+      position: absolute
+      width: 100%
+      top: 50%
+      transform: translateY(-50%)
     .recommend-content
       height: 100%
       overflow: hidden
@@ -118,9 +128,5 @@ export default {
               color: $color-text
             .desc
               color: $color-text-d
-      .loading-container
-        position: absolute
-        width: 100%
-        top: 50%
-        transform: translateY(-50%)
+
 </style>

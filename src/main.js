@@ -11,7 +11,9 @@ Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
 FastClick.attach(document.body)
 Vue.use(VueLazyload, {
-  loading: require('common/image/default.png')
+  loading: require('common/image/default.png'),
+  preLoad: 1.3,
+  attempt: 1
 })
 /* eslint-disable no-new */
 new Vue({
