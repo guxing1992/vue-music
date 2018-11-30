@@ -1,9 +1,10 @@
-import {commonParmas} from './config'
+// import jsonp from 'common/js/jsonp'
+import {commonParams} from './config'
 import axios from 'axios'
 export function getRecommand () {
 //   const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
   const url = 'api/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
-  const data = Object.assign({}, commonParmas, {
+  const data = Object.assign({}, commonParams, {
     uin: 1392497812,
     platform: 'h5',
     needNewCode: 1
@@ -36,4 +37,30 @@ export function getRecommand () {
   //     reject(err)
   //   })
   // })
+}
+
+export function getDiscList () {
+  const url = 'server/getDiscList'
+  const data = Object.assign({}, commonParams, {
+    platform: 'yqq',
+    hostUin: 0,
+    sin: 0,
+    ein: 29,
+    sortId: 5,
+    needNewCode: 0,
+    categoryId: 10000000,
+    rnd: Math.random(),
+    format: 'json'
+  })
+  return axios.get(url, {
+    headers: {
+      // referer: 'https://y.qq.com/portal/playlist.html',
+      // host: 'c.y.qq.com'
+    },
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  }).catch((err) => {
+    return Promise.reject(err)
+  })
 }

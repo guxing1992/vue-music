@@ -1,12 +1,13 @@
-export const commonParmas = {
-  g_tk: 866488564,
-  format: 'json',
+export const commonParams = {
+  g_tk: 1928093487,
   inCharset: 'utf-8',
   outCharset: 'utf-8',
   notice: 0,
-  _: 1543486821623
+  format: 'jsonp'
 }
+
 export const options = {
   param: 'jsonpCallback'
 }
-export const ERROR_OK = 0
+
+export const ERR_OK = 0
