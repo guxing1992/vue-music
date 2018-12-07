@@ -1,6 +1,7 @@
 <template>
     <div class="singer" ref="singer">
-        <list-view :data="singerlist"></list-view>
+        <list-view :data="singerlist" @selectItem="selectItem"></list-view>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -9,6 +10,7 @@ import {getSingerList} from '@/api/singer'
 import {ERR_OK} from '@/api/config'
 import Singer from '@/common/class/SingerClass'
 import ListView from '@/base/listview/listview'
+import {mapMutations} from 'vuex'
 const HOT_NAME = '热门'
 const HOT_SINGER_LENGTH = 10
 export default {
@@ -22,6 +24,15 @@ export default {
     this._getSingerList(-100)
   },
   methods: {
+    selectItem (singer) {
+      this.$router.push({
+        path: `/singer/${singer.singer_id}`
+      })
+      this.setSinger(singer)
+    },
+    ...mapMutations({
+      setSinger: 'SET_SINGER'
+    }),
     _getSingerList (index) {
       var templist = []
       getSingerList(index).then((res) => {
@@ -29,7 +40,7 @@ export default {
           res = res.singerList.data.singerlist
           res.forEach((item, index) => {
             templist.push(
-              new Singer({country: item.country, singerId: item.singer_id, singerName: item.singer_name, singerPic: item.singer_pic}))
+              new Singer({country: item.country, singerId: item.singer_id, singerName: item.singer_name, singerPic: item.singer_pic, singerMid: item.singer_mid}))
           })
           this.singerlist = this._normalizeSinger(templist)
         }
