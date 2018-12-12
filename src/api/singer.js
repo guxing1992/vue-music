@@ -38,3 +38,7 @@ export function getSingerDetail (singerId) {
   //   return Promise.reject(err)
   // })
 }
+
+// export function getSongVkey(songmid){
+
+// }

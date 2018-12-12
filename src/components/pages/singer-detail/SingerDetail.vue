@@ -1,6 +1,6 @@
 <template>
     <transition name="slide">
-        <div class="singer-detail">singer-detail</div>
+        <music-list :songs='songs' :title="title" :bgImage="bgImage"></music-list>
     </transition>
 </template>
 
@@ -8,24 +8,42 @@
 import {mapGetters} from 'vuex'
 import {getSingerDetail} from '@/api/singer'
 import {ERR_OK} from '@/api/config'
+import {createSong} from '@/common/class/SongClass'
+import {getSongVkey} from '@/api/song'
+import MusicList from '../music-list/MusicList'
 export default {
   data () {
     return {
-      singerdata: {}
+      singerdata: {},
+      songs: []
     }
   },
 
-  components: {},
+  components: {MusicList},
 
   computed: {
+    bgImage () {
+      return this.singer.singer_pic
+    },
+    title () {
+      return this.singer.singer_name
+    },
     ...mapGetters([
       'singer'
     ])
   },
   created () {
     this._getSingerDetail()
+    // getSongVkey('003jjoM94WLiTf').then((res) => {
+    //   console.log(res.req.data.vkey)
+    // })
   },
   methods: {
+    _getSongVkey (songmid) {
+      getSongVkey('003jjoM94WLiTf').then((res) => {
+        console.log(res.req)
+      })
+    },
     _getSingerDetail () {
       if (!this.singer.singer_mid) {
         this.$router.push('/singer')
@@ -34,11 +52,23 @@ export default {
       getSingerDetail(this.singer.singer_mid).then((res) => {
         if (res.code === ERR_OK) {
           this.singerdata = res.data
+          this.songs = this._normalizeSongs(res.data.list)
         }
       }).catch((err) => {
         console.log(err)
       })
+    },
+    _normalizeSongs (list) {
+      let ret = []
+      list.forEach(item => {
+        let {musicData} = item
+        if (musicData.songid && musicData.albummid) {
+          ret.push(createSong(musicData))
+        }
+      })
+      return ret
     }
+
   }
 }
 
@@ -52,12 +82,4 @@ export default {
   transform :translate3d(100%,0,0)
 }
 
-.singer-detail
-    position fixed
-    z-index 100
-    top 0
-    bottom 0
-    right 0
-    left 0
-    background $color-background
 </style>
