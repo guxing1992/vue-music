@@ -313,14 +313,14 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
   .list-wrapper
-    position: relative
-    height: 100%
-    /*position: absolute*/
-    /*left: 0*/
-    /*top: 0*/
-    /*right: 0*/
-    /*bottom: 0*/
-    overflow: hidden
+    // position: relative
+    // height: 100%
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    // overflow: hidden
     .scroll-content
       position: relative
       z-index: 1
