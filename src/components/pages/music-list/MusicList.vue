@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import {getSongVkey} from '@/api/song'
 import Scorll from '@/base/scroll/scroll'
 import SongList from '@/base/songlist/SongList'
 import {prefixStyle} from '@/common/js/dom'
@@ -39,7 +40,8 @@ export default {
     return {
       scrollY: 0,
       probeType: 3,
-      listenScorll: true
+      listenScorll: true,
+      currentPlayUrl: ''
     }
   },
   props: {
@@ -76,9 +78,25 @@ export default {
     },
     // 监听子组件传递的数据
     selectItem (item, index) {
-      this.selectPlay({
-        list: this.songs,
-        index
+      this._getSongPlayUrlByItem(item).then((playurl) => {
+        this.currentPlayUrl = playurl
+        this.selectPlay({
+          list: this.songs,
+          index,
+          currentPlayUrl: playurl
+        })
+      })
+    },
+    _getSongPlayUrlByItem (item) {
+      return getSongVkey(item.mid).then((res) => {
+        // console.log(res)
+        if (res.code === 0) {
+          let data = res.req_0.data
+          let midUrlinfo = data.midurlinfo
+          let serverip = data.sip[1]
+          let playurl = serverip + midUrlinfo[0].purl
+          return playurl
+        }
       })
     },
     ...mapActions(['selectPlay'])

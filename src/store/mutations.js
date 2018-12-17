@@ -20,6 +20,9 @@ const mutations = {
   },
   [types.SET_CURRENTINDEX] (state, currentIndex) {
     state.currentIndex = currentIndex
+  },
+  [types.SET_CURRENTPLAY_URL] (state, currentPlayUrl) {
+    state.currentPlayUrl = currentPlayUrl
   }
 
 }
