@@ -30,6 +30,7 @@ import {getSongVkey} from '@/api/song'
 import Scorll from '@/base/scroll/scroll'
 import SongList from '@/base/songlist/SongList'
 import {prefixStyle} from '@/common/js/dom'
+import {testPlayUrl} from '@/common/js/const'
 import Loading from '@/base/loading/loading'
 import {mapActions} from 'vuex'
 const RESERVED_HEIGHT = 40
@@ -83,7 +84,8 @@ export default {
         this.selectPlay({
           list: this.songs,
           index,
-          currentPlayUrl: playurl
+          // currentPlayUrl: playurl
+          currentPlayUrl: testPlayUrl
         })
       })
     },
